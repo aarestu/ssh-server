@@ -11,7 +11,7 @@ ln -fs /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
 sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
 
 # install service software
-apt-get --reinstall --fix-missing install -y screen wget
+apt-get --reinstall --fix-missing install -y screen curl
 echo "clear" >>.profile
 echo "neofetch" >>.profile
 
