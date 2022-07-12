@@ -47,6 +47,7 @@ systemctl enable rc-local
 systemctl start rc-local.service
 
 # install dropbear
+apt-get --reinstall --fix-missing install -y dropbear
 sed -i 's/NO_START=1/NO_START=0/g' /etc/default/dropbear
 sed -i 's/DROPBEAR_PORT=22/DROPBEAR_PORT=143/g' /etc/default/dropbear
 echo "/bin/false" >>/etc/shells
