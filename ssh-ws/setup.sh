@@ -67,6 +67,9 @@ screen -dmS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300 --max-clients 500
 
 # install ws
 
+curl -o /usr/local/bin/ws-non-tls.py https://raw.githubusercontent.com/aarestu/ssh-server/main/ssh-ws/ws-non-tls.py
+chmod +x /usr/local/bin/ws-non-tls.py
+
 cat >/etc/systemd/system/ws-non-tls.service <<-END
 [Unit]
   Description=Python Proxy Mod WS
@@ -86,7 +89,10 @@ cat >/etc/systemd/system/ws-non-tls.service <<-END
   WantedBy=multi-user.target
 END
 
-cat >/etc/systemd/system/ws-non-tls.service <<-END
+curl -o /usr/local/bin/ws-tls.py https://raw.githubusercontent.com/aarestu/ssh-server/main/ssh-ws/ws-tls.py
+chmod +x /usr/local/bin/ws-tls.py
+
+cat >/etc/systemd/system/ws-tls.service <<-END
 [Unit]
   Description=Python Proxy Mod WS
   Documentation=https://t.me/aarestu
@@ -104,7 +110,6 @@ cat >/etc/systemd/system/ws-non-tls.service <<-END
 [Install]
   WantedBy=multi-user.target
 END
-
 
 # enable ws
 systemctl enable ws-non-tls
