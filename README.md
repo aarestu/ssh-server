@@ -10,5 +10,5 @@ and
 
 setup:
 ```
-curl -s <em>https://raw.githubusercontent.com/aarestu/ssh-server/main/ssh-ws/setup.sh</em> | bash
+curl -s -L https://raw.githubusercontent.com/aarestu/ssh-server/main/ssh-ws/setup.sh | bash
 ```
