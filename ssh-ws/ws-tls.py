@@ -60,12 +60,15 @@ class Handler(StreamRequestHandler):
 
         self.connection.send(b'HTTP/1.1 101 Switching Protocols\r\n\r\n')
 
-        ssh = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        ssh.connect((host, SSH_PORT))
-        if self.server.timeout:
-            ssh.settimeout(self.server.timeout)
-        self.forward_data(ssh, self.connection)
-        ssh.close()
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as ssh:
+            if self.server.timeout:
+                ssh.settimeout(self.server.timeout)
+            try:
+                ssh.connect((host, SSH_PORT))
+                self.forward_data(ssh, self.connection)
+            except Exception as e:
+                self.log(DEBUG, e)
+                pass
 
     def forward_data(self, remote, client):
         self.log(INFO, "forward data connection")
